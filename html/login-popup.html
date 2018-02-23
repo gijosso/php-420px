@@ -1,0 +1,57 @@
+<div class="popup" data-popup="popup-1">
+    <div class="popup-inner">
+        <h2>Log in with your credentials</h2>
+        <p style="color:red">Please fill the areas with *</p>
+        <form id="login-form" method="post" action="index">
+            Pseudo:<br>
+            <label>
+                <input id="ipseudo" type="text" name="pseudo" value="">
+            </label><br>
+            Password:<br>
+            <label>
+                <input id="ipassword" type="password" name="password" value="">
+            </label>
+            <br>
+            <input id="log-me-in" class="button disabled" type="submit" value="Log in!" name="submit">
+        </form>
+        <div class="button-container">
+            <div class="button" data-popup-close="popup-1">Close</div>
+            <div id="sign-up" class="button">
+                <a class="silent-link" href="signup">Sign Up</a>
+            </div>
+        </div>
+        <a class="popup-close" data-popup-close="popup-1" href="#">x</a>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('[data-popup-open]').on('click', function (e) {
+            var targeted_popup_class = jQuery(this).attr('data-popup-open');
+            $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+            e.preventDefault();
+        });
+        $('[data-popup-close]').on('click', function (e) {
+            var targeted_popup_class = jQuery(this).attr('data-popup-close');
+            $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+            e.preventDefault();
+        });
+    });
+
+    $('#ipseudo, #ipassword').on('input', function () {
+        if ($('#ipseudo').val().length > 0 && $('#ipassword').val().length > 0) {
+            $('#log-me-in').removeClass('disabled');
+        }
+        else {
+            $('#log-me-in').addClass('disabled');
+        }
+    });
+
+    $('#log-me-in').on('click', function (e) {
+        if (!$(this).hasClass('disabled')) {
+
+        } else {
+            e.preventDefault();
+        }
+    });
+</script>

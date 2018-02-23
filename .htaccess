@@ -1,0 +1,28 @@
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^.*$ /420px/error [L]
+
+RewriteRule ^([^.?]+)$ %{REQUEST_URI}.php [L]
+
+RewriteCond %{THE_REQUEST} "^[^ ]* .*?\.php[? ].*$"
+RewriteRule .* - [L,R=404]
+
+<ifmodule mod_php5.c>
+php_value zlib.output_compression 16386
+</ifmodule>
+
+<Files ~ "^.*\.([Hh][Tt][Aa])">
+ order allow,deny
+ deny from all
+ satisfy all
+</Files>
+
+<FilesMatch "composer\.json|composer.lock">
+ order allow,deny
+ deny from all
+ satisfy all
+</FilesMatch>
+
+RewriteRule ^\.idea/?$ - [F]
